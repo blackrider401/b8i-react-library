@@ -1,6 +1,6 @@
 {
   "name": "@burgeon8interactive/bi-react-library",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "npm module for node js development",
   "main": "./src/main.tsx",
   "scripts": {
@@ -10,7 +10,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "publish": "npm publish"
+    "pub": "npm publish"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

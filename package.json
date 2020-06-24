@@ -1,10 +1,10 @@
 {
   "name": "@burgeon8interactive/bi-react-library",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "npm module for node js development",
   "main": "./src/index.tsx",
   "scripts": {
-    "build": "cd examples/lib && copy main.tsx index.tsx ",
+    "build": "cd exampleApp/lib && copy main.tsx index.tsx ",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",

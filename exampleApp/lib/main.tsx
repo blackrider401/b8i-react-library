@@ -11,7 +11,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 export const scaleFont = (val) => {
   let factor = PixelRatio.get();
@@ -27,7 +27,7 @@ const Elevation = (elevation) => {
     : (response = {
         elevation,
         shadowColor: '#0001',
-        shadowOffset: { width: 0, height: elevation * 0.6 },
+        shadowOffset: {width: 0, height: elevation * 0.6},
         shadowOpacity: 0.8,
         shadowRadius: elevation * 0.5,
       });
@@ -112,7 +112,7 @@ interface TextWrapProps {
   children: React.ReactNode;
 }
 
-export const TextWrap = ({ ...props }: TextWrapProps & GeneralProps) => {
+export const TextWrap = ({...props}: TextWrapProps & GeneralProps) => {
   return (
     <Text
       allowFontScaling={false}
@@ -247,9 +247,7 @@ interface AvatarProp {
   right: number;
 }
 
-export const Avatar = ({
-  ...props
-}: AvatarProp & GeneralProps & MarginProps) => {
+export const Avatar = ({...props}: AvatarProp & GeneralProps & MarginProps) => {
   return (
     <View
       style={[
@@ -271,7 +269,7 @@ export const Avatar = ({
         },
       ]}>
       <ImageBackground
-        source={props.source || { uri: props.url }}
+        source={props.source || {uri: props.url}}
         resizeMode="cover"
         style={[
           styles.overflow,
@@ -313,10 +311,10 @@ interface ScrollAreaProps {
   children: React.ReactNode;
 }
 
-export const ScrollArea = ({ ...props }: ScrollAreaProps) => (
+export const ScrollArea = ({...props}: ScrollAreaProps) => (
   <ScrollView
     keyboardShouldPersistTaps="handled"
-    contentContainerStyle={{ flexGrow: props.flexGrow }}
+    contentContainerStyle={{flexGrow: props.flexGrow}}
     horizontal={props.horizontal}
     showsVerticalScrollIndicator={false}
     showsHorizontalScrollIndicator={false}>
@@ -326,8 +324,8 @@ export const ScrollArea = ({ ...props }: ScrollAreaProps) => (
 
 /* ANCHOR  STYLES*/
 const styles = StyleSheet.create({
-  overflow: { overflow: 'hidden' },
-  flex: { flex: 1 },
-  input: { paddingLeft: 0, fontWeight: Platform.OS === 'ios' ? 'bold' : null },
-  rounded: { justifyContent: 'center', alignItems: 'center' },
+  overflow: {overflow: 'hidden'},
+  flex: {flex: 1},
+  input: {paddingLeft: 0, fontWeight: Platform.OS === 'ios' ? 'bold' : null},
+  rounded: {justifyContent: 'center', alignItems: 'center'},
 });

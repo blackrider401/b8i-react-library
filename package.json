@@ -1,6 +1,6 @@
 {
   "name": "@burgeon8interactive/bi-react-library",
-  "version": "1.0.8",
+  "version": "1.0.85",
   "description": "npm module for node js development",
   "main": "./src/index.tsx",
   "scripts": {

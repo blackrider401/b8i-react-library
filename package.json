@@ -1,0 +1,18 @@
+{
+	"name": "@burgeon8interactive/bi-react-library",
+	"version": "1.0.0",
+	"description": "npm module for node js development",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
+	"repository": {
+		"url": "git://github.com/Burgeon8interactive/b8i-react-library.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"keywords": []
+}

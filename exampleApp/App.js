@@ -18,6 +18,8 @@ import {
   TouchWrap,
   Page,
   InputWrap,
+  SlideTransition,
+  ScrollArea,
 } from './lib/main';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -28,42 +30,77 @@ const App = () => {
   const [isSecure, setIsSecure] = React.useState(true);
   return (
     <Page barIconColor="dark" backgroundColor="#ff9800">
-      <Container
-        horizontalAlignment="center"
-        verticalAlignment="center"
-        paddingHorizontal={6}
-        flex={1}>
-        <Avatar backgroundColor="red" size={30} url={pic} />
+      <ScrollArea flexGrow={1}>
+        <Container
+          horizontalAlignment="center"
+          verticalAlignment="center"
+          paddingTop={10}
+          paddingBottom={6}
+          paddingHorizontal={6}
+          flex={1}>
+          <Avatar backgroundColor="red" size={30} url={pic} />
+        </Container>
 
-        <SizedBox height={5} />
+        <Container
+          verticalAlignment="center"
+          widthPercent="100%"
+          backgroundColor="red"
+          paddingVertical={6}
+          paddingHorizontal={6}
+          borderTopRightRadius={50}
+          borderTopLeftRadius={50}>
+          <SlideTransition direction="vertical" from={80}>
+            <InputWrap
+              elevation={20}
+              borderRadius={50}
+              paddingVertical={2}
+              icon={<Icon name="mail" size={20} />}
+              placeholder="Email"
+              backgroundColor="#fff"
+              textAlignVertical="center"
+              secure={isSecure}
+              keyboardType="email-address"
+              returnKeyType="next"
+            />
+          </SlideTransition>
 
-        <InputWrap
-          elevation={20}
-          borderRadius={50}
-          paddingVertical={2}
-          icon={<Icon name="mail" size={20} />}
-          placeholder="Email"
-          backgroundColor="#fff"
-          textAlignVertical="center"
-          secure={isSecure}
-          keyboardType="email-address"
-        />
+          <SizedBox height={2} />
 
-        <SizedBox height={3} />
+          <SlideTransition direction="vertical" from={80}>
+            <InputWrap
+              elevation={20}
+              borderRadius={50}
+              paddingVertical={2}
+              icon={<Icon name="mail" size={20} />}
+              placeholder="Email"
+              backgroundColor="#fff"
+              textAlignVertical="center"
+              secure={isSecure}
+              keyboardType="email-address"
+              returnKeyType="next"
+            />
+          </SlideTransition>
 
-        <InputWrap
-          onToggleSecure={() => setIsSecure(!isSecure)}
-          elevation={20}
-          borderRadius={50}
-          paddingVertical={2}
-          icon={<Icon name="lock" size={20} />}
-          secureIcon={<Icon name={isSecure ? 'eye' : 'eye-off'} size={20} />}
-          placeholder="Password"
-          backgroundColor="#fff"
-          textAlignVertical="center"
-          secure={isSecure}
-        />
-      </Container>
+          <SizedBox height={2} />
+
+          <SlideTransition from={80} direction="vertical">
+            <InputWrap
+              onToggleSecure={() => setIsSecure(!isSecure)}
+              elevation={20}
+              borderRadius={50}
+              paddingVertical={2}
+              icon={<Icon name="lock" size={20} />}
+              secureIcon={
+                <Icon name={isSecure ? 'eye' : 'eye-off'} size={20} />
+              }
+              placeholder="Password"
+              backgroundColor="#fff"
+              textAlignVertical="center"
+              secure={isSecure}
+            />
+          </SlideTransition>
+        </Container>
+      </ScrollArea>
     </Page>
   );
 };

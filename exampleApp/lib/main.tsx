@@ -1,7 +1,7 @@
 // @flow
 
 import React, {ReactNode} from 'react';
-
+import Animated, {Easing} from 'react-native-reanimated';
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import {
   TextInput,
 } from 'react-native';
 const {width, height} = Dimensions.get('window');
+const {Value} = Animated;
 
 export const scaleFont = (val: any) => {
   let factor = PixelRatio.get();
@@ -383,7 +384,7 @@ export const ScrollArea = ({...props}: ScrollAreaProps) => (
     horizontal={props.horizontal}
     showsVerticalScrollIndicator={false}
     showsHorizontalScrollIndicator={false}>
-    {props.children}
+    <View style={{flexGrow: props.flexGrow}}>{props.children}</View>
   </ScrollView>
 );
 
@@ -727,6 +728,65 @@ InputWrap.defaultProps = {
   horizontalAlignment: 'center',
 };
 
+/* ANCHOR  SLIDE HORIZONTAL TRANSITION */
+interface SlideProps {
+  direction: 'horizontal' | 'vertical';
+  duration: number;
+  from: number;
+  style: any;
+  elastic: number;
+  children: React.ReactNode;
+}
+
+export const SlideTransition = ({...props}: SlideProps) => {
+  const [animate] = React.useState(new Value(0));
+  const slide = () => {
+    Animated.timing(animate, {
+      toValue: 1,
+      duration: props.duration || 750,
+      easing: Easing.elastic(props.elastic || 0),
+    }).start();
+  };
+
+  React.useEffect(() => {
+    slide();
+  }, [props.index]);
+
+  const slideX = animate.interpolate({
+    inputRange: [0, 1],
+    outputRange: [Width(props.from), 0],
+  });
+
+  const slideY = animate.interpolate({
+    inputRange: [0, 1],
+    outputRange: [Height(props.from), 0],
+  });
+
+  return (
+    <Animated.View
+      style={[
+        styles.width,
+        props.style,
+        {
+          transform:
+            props.direction === 'horizontal'
+              ? [
+                  {
+                    translateX: slideX,
+                  },
+                ]
+              : [
+                  {
+                    translateY: slideY,
+                  },
+                ],
+        },
+      ]}>
+      {props.children}
+    </Animated.View>
+  );
+};
+
 /* ANCHOR  STYLES*/
 const styles = StyleSheet.create({
   overflow: {overflow: 'hidden'},
@@ -735,5 +795,6 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     fontWeight: Platform.OS === 'ios' ? 'bold' : null,
   },
+  width: {width: '100%'},
   rounded: {justifyContent: 'center', alignItems: 'center'},
 });

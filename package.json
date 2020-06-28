@@ -23,7 +23,8 @@
   "keywords": [],
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-reanimated": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

@@ -4,7 +4,7 @@
   "description": "npm module for node js development",
   "main": "./src/index.tsx",
   "scripts": {
-    "build": "cd exampleApp/lib && copy main.tsx index.tsx ",
+    "build": "cp ./exampleApp/lib/main.tsx ./src/index.tsx ",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",

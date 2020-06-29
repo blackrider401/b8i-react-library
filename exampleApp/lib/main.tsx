@@ -135,11 +135,8 @@ export const TextWrap = ({...props}: TextWrapProps) => {
         {
           fontWeight: props.fontWeight,
           color: props.color,
-          fontSize: scaleFont(props.fontSize) || scaleFont(25),
-          lineHeight:
-            scaleFont(props.lineHeight) ||
-            scaleFont(props.fontSize) ||
-            scaleFont(25),
+          fontSize: scaleFont(props.fontSize) || null,
+          lineHeight: scaleFont(props.lineHeight) || null,
           fontFamily: props.fontFamily,
           textAlign: props.textAlign,
         },
@@ -414,6 +411,7 @@ export const ScrollAreaRefresh = ({...props}: ScrollAreaRefreshProps) => (
 /* ANCHOR IMAGE WRAP */
 
 interface ImageWrapProps {
+  elevation: number;
   source: any;
   url: any;
   height: any;
@@ -451,6 +449,7 @@ export const ImageWrap = ({
       style={[
         styles.overflow,
         {
+          ...Elevation(props.elevation),
           position: props.position,
           width: Width(props.width) || props.widthPercent || '100%',
           height: Height(props.height) || '100%',
@@ -458,25 +457,19 @@ export const ImageWrap = ({
           borderRadius: props.borderRadius,
           borderTopLeftRadius: props.borderTopLeftRadius,
           borderBottomLeftRadius: props.borderBottomLeftRadius,
-          margin: props.margin,
-          marginVertical: props.marginVertical,
-          marginHorizontal: props.marginHorizontal,
-          marginRight: props.marginRight,
-          marginLeft: props.marginLeft,
-          marginTop: props.marginTop,
-          marginBottom: props.marginBottom,
+          margin: Width(props.margin),
+          marginVertical: Height(props.marginVertical),
+          marginHorizontal: Width(props.marginHorizontal),
+          marginRight: Width(props.marginRight),
+          marginLeft: Width(props.marginLeft),
+          marginTop: Height(props.marginTop),
+          marginBottom: Height(props.marginBottom),
           padding: props.padding,
         },
       ]}>
-      <View
-        style={[
-          styles.flex,
-          {
-            backgroundColor: props.overlayColor,
-          },
-        ]}>
+      <Container flex={1} backgroundColor={props.overlayColor}>
         {props.children}
-      </View>
+      </Container>
     </ImageBackground>
   );
 };
@@ -728,7 +721,7 @@ InputWrap.defaultProps = {
   horizontalAlignment: 'center',
 };
 
-/* ANCHOR  SLIDE HORIZONTAL TRANSITION */
+/* ANCHOR  SLIDE TRANSITION */
 interface SlideProps {
   direction: 'horizontal' | 'vertical';
   duration: number;
@@ -768,6 +761,83 @@ export const SlideTransition = ({...props}: SlideProps) => {
         styles.width,
         props.style,
         {
+          transform:
+            props.direction === 'horizontal'
+              ? [
+                  {
+                    translateX: slideX,
+                  },
+                ]
+              : [
+                  {
+                    translateY: slideY,
+                  },
+                ],
+        },
+      ]}>
+      {props.children}
+    </Animated.View>
+  );
+};
+
+/* ANCHOR  SLIDE TRANSITION CALLBACK*/
+interface SlideCallbackProps {
+  direction: 'horizontal' | 'vertical';
+  duration: number;
+  from?: number;
+  style: any;
+  elastic: number;
+  children: React.ReactNode;
+  handleComplete: () => void;
+  index: boolean;
+}
+
+export const SlideTransitionCallback = ({...props}: SlideCallbackProps) => {
+  const [animate] = React.useState(new Value(0));
+  const [show, setShow] = React.useState(props.index);
+
+  const slideShow = () => {
+    Animated.timing(animate, {
+      toValue: 1,
+      duration: props.duration || 1200,
+      easing: Easing.elastic(1.1),
+    }).start(() => setShow(props.index));
+  };
+
+  const slideHide = () => {
+    Animated.timing(animate, {
+      toValue: 0,
+      duration: 750,
+      easing: Easing.back(1.1),
+    }).start(() => setShow(props.index));
+  };
+
+  React.useEffect(() => {
+    if (props.index === true) {
+      slideShow();
+    }
+
+    if (props.index === false) {
+      slideHide();
+    }
+  }, [props.index]);
+
+  const slideX = animate.interpolate({
+    inputRange: [0, 1],
+    outputRange: [Width(props.from), 0],
+  });
+
+  const slideY = animate.interpolate({
+    inputRange: [0, 1],
+    outputRange: [Height(props.from), 0],
+  });
+
+  return (
+    <Animated.View
+      style={[
+        props.style,
+        {
+          opacity: animate,
           transform:
             props.direction === 'horizontal'
               ? [

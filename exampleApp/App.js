@@ -20,85 +20,135 @@ import {
   InputWrap,
   SlideTransition,
   ScrollArea,
+  SlideTransitionCallback,
+  scaleFont,
+  ImageWrap,
 } from './lib/main';
 import Icon from 'react-native-vector-icons/Feather';
+import {H1, P, H2} from './src/helpers/config';
 
-const obj = ['', '', '', ''];
+const obj1 = [
+  'https://www.eehealth.org/-/media/images/modules/blog/posts/2019/09/working-out.jpg',
+  'https://www.sharp.com/health-news/images/Fitness-tips-for-the-non-athlete-HN1471-iStock-922482702-Sized.jpg',
+  'https://www.motherhoodthetruth.com/wp-content/uploads/2019/02/working-out-SWEAT-APP.jpg',
+];
+
+const obj2 = [
+  'https://i0.wp.com/post.healthline.com/wp-content/uploads/2019/10/Female_Male_Rope_Workout_1296x728-header-1296x728.jpg?w=1155&h=1528',
+  'https://www.eehealth.org/-/media/images/modules/blog/posts/2019/09/working-out.jpg',
+  'https://www.sharp.com/health-news/images/Fitness-tips-for-the-non-athlete-HN1471-iStock-922482702-Sized.jpg',
+  'https://www.motherhoodthetruth.com/wp-content/uploads/2019/02/working-out-SWEAT-APP.jpg',
+  'https://i0.wp.com/post.healthline.com/wp-content/uploads/2019/10/Female_Male_Rope_Workout_1296x728-header-1296x728.jpg?w=1155&h=1528',
+  'https://www.eehealth.org/-/media/images/modules/blog/posts/2019/09/working-out.jpg',
+  'https://www.sharp.com/health-news/images/Fitness-tips-for-the-non-athlete-HN1471-iStock-922482702-Sized.jpg',
+  'https://www.motherhoodthetruth.com/wp-content/uploads/2019/02/working-out-SWEAT-APP.jpg',
+];
 const pic = 'https://randomuser.me/api/portraits/women/96.jpg';
+const img =
+  'https://www.wellandgood.com/wp-content/uploads/2019/10/GettyImages-1132086660-599x400.jpg';
 
 const App = () => {
-  const [isSecure, setIsSecure] = React.useState(true);
   return (
-    <Page barIconColor="dark" backgroundColor="#ff9800">
-      <ScrollArea flexGrow={1}>
+    <Page barIconColor="dark" backgroundColor="#ffffff">
+      <Container marginBottom={4}>
+        <SizedBox height={6} />
         <Container
-          horizontalAlignment="center"
+          direction="row"
+          horizontalAlignment="space-between"
           verticalAlignment="center"
-          paddingTop={10}
-          paddingBottom={6}
-          paddingHorizontal={6}
-          flex={1}>
-          <Avatar backgroundColor="red" size={30} url={pic} />
+          paddingHorizontal={6}>
+          <TouchWrap padding={3} backgroundColor="#cac9cf" borderRadius={10}>
+            <Icon name="bell" size={scaleFont(14)} color="#fff" />
+          </TouchWrap>
+
+          <H2 fontSize={16}>HOME</H2>
+
+          <TouchWrap padding={3} backgroundColor="#f2bb23" borderRadius={10}>
+            <Icon name="settings" size={scaleFont(14)} color="#fff" />
+          </TouchWrap>
+        </Container>
+      </Container>
+
+      <ScrollArea>
+        <Container paddingHorizontal={6}>
+          <H2 fontSize={15}>Featured Workouts</H2>
+          <SizedBox height={1} />
+          <ImageWrap
+            url={img}
+            backgroundColor="#efefef"
+            height={25}
+            borderRadius={25}
+            overlayColor="#0009">
+            <Container flex={1} padding={5} verticalAlignment="flex-end">
+              <H2 color="#fff" fontSize={16}>
+                Whole Body Workout
+              </H2>
+              <P color="#fff" font={12}>
+                Level 5
+              </P>
+            </Container>
+          </ImageWrap>
         </Container>
 
-        <Container
-          verticalAlignment="center"
-          widthPercent="100%"
-          backgroundColor="red"
-          paddingVertical={6}
-          paddingHorizontal={6}
-          borderTopRightRadius={50}
-          borderTopLeftRadius={50}>
-          <SlideTransition direction="vertical" from={80}>
-            <InputWrap
-              elevation={20}
-              borderRadius={50}
-              paddingVertical={2}
-              icon={<Icon name="mail" size={20} />}
-              placeholder="Email"
-              backgroundColor="#fff"
-              textAlignVertical="center"
-              secure={isSecure}
-              keyboardType="email-address"
-              returnKeyType="next"
-            />
-          </SlideTransition>
-
+        <Container marginTop={4} paddingHorizontal={6}>
+          <H2 fontSize={15}>Plan Set</H2>
           <SizedBox height={2} />
 
-          <SlideTransition direction="vertical" from={80}>
-            <InputWrap
-              elevation={20}
-              borderRadius={50}
-              paddingVertical={2}
-              icon={<Icon name="mail" size={20} />}
-              placeholder="Email"
-              backgroundColor="#fff"
-              textAlignVertical="center"
-              secure={isSecure}
-              keyboardType="email-address"
-              returnKeyType="next"
-            />
-          </SlideTransition>
+          <ScrollArea horizontal={true}>
+            <Container direction="row">
+              {obj1.map((el, i) => (
+                <ImageWrap
+                  key={i}
+                  url={el}
+                  backgroundColor="#efefef"
+                  width={38}
+                  height={22}
+                  marginRight={2}
+                  borderRadius={25}
+                  overlayColor="#0007">
+                  <Container flex={1} padding={5} verticalAlignment="flex-end">
+                    <H2 color="#fff" fontSize={11}>
+                      Fat Burner
+                    </H2>
+                    <P color="#fff" fontSize={7}>
+                      Level 5
+                    </P>
+                  </Container>
+                </ImageWrap>
+              ))}
+            </Container>
+          </ScrollArea>
+        </Container>
 
+        <Container marginTop={4} paddingHorizontal={6}>
+          <H2 fontSize={15}>Plan Set</H2>
           <SizedBox height={2} />
 
-          <SlideTransition from={80} direction="vertical">
-            <InputWrap
-              onToggleSecure={() => setIsSecure(!isSecure)}
-              elevation={20}
-              borderRadius={50}
-              paddingVertical={2}
-              icon={<Icon name="lock" size={20} />}
-              secureIcon={
-                <Icon name={isSecure ? 'eye' : 'eye-off'} size={20} />
-              }
-              placeholder="Password"
-              backgroundColor="#fff"
-              textAlignVertical="center"
-              secure={isSecure}
-            />
-          </SlideTransition>
+          <Container
+            direction="row"
+            wrap="wrap"
+            horizontalAlignment="space-between">
+            {obj2.map((el, i) => (
+              <ImageWrap
+                key={i}
+                url={el}
+                backgroundColor="#efefef"
+                widthPercent="48%"
+                height={22}
+                marginBottom={2}
+                borderRadius={25}
+                overlayColor="#0007">
+                <Container flex={1} padding={5} verticalAlignment="flex-end">
+                  <H2 color="#fff" fontSize={11}>
+                    Fat Burner
+                  </H2>
+                  <P color="#fff" fontSize={7}>
+                    Level 5
+                  </P>
+                </Container>
+              </ImageWrap>
+            ))}
+          </Container>
         </Container>
       </ScrollArea>
     </Page>

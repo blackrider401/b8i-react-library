@@ -639,6 +639,8 @@ interface InputWrapProps {
   textAlign: 'center' | 'left' | 'right';
   children: Element;
   flex: number;
+  textPaddingVertical: number;
+  textPaddingHorizontal: number;
 }
 
 export const InputWrap = ({...props}: InputWrapProps & PaddingProps) => {
@@ -695,7 +697,10 @@ export const InputWrap = ({...props}: InputWrapProps & PaddingProps) => {
             fontSize: scaleFont(props.fontSize) || scaleFont(11),
             paddingTop: Height(props.paddingTop),
             paddingBottom: Height(props.paddingBottom),
-            paddingVertical: Height(props.paddingVertical),
+            paddingVertical: Height(props.textPaddingVertical),
+            paddingHorizontal: Height(props.textPaddingHorizontal),
+            paddingLeft: Width(props.paddingLeft),
+            paddingRight: Width(props.paddingRight),
           },
           props.inputStyle,
         ]}

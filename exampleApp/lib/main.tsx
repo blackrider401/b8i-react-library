@@ -333,7 +333,7 @@ export const Avatar = ({...props}: AvatarProp & GeneralProps & MarginProps) => {
         style={[
           styles.flex,
           {
-            borderRadius: Width(props.size) / 2,
+            borderRadius: Width(props.size),
             borderWidth: props.borderWidth,
             borderColor: props.borderColor,
           },

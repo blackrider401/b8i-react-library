@@ -816,7 +816,7 @@ export const SlideTransitionCallback = ({...props}: SlideCallbackProps) => {
   const slideHide = () => {
     Animated.timing(animate, {
       toValue: 0,
-      duration: 750,
+      duration: props.duration || 750,
       easing: Easing.back(1.1),
     }).start(() => setShow(props.index));
   };

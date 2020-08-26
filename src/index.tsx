@@ -1,7 +1,7 @@
 // @flow
 
-import React, {ReactNode} from 'react';
-import Animated, {Easing} from 'react-native-reanimated';
+import React, { ReactNode } from 'react';
+import Animated, { Easing } from 'react-native-reanimated';
 import {
   View,
   Text,
@@ -18,8 +18,8 @@ import {
   StatusBar,
   TextInput,
 } from 'react-native';
-const {width, height} = Dimensions.get('window');
-const {Value} = Animated;
+const { width, height } = Dimensions.get('window');
+const { Value } = Animated;
 
 export const scaleFont = (val: any) => {
   let factor = PixelRatio.get();
@@ -35,7 +35,7 @@ const Elevation = (elevation: any) => {
     : (response = {
         elevation,
         shadowColor: '#0001',
-        shadowOffset: {width: 0, height: elevation * 0.6},
+        shadowOffset: { width: 0, height: elevation * 0.6 },
         shadowOpacity: 0.8,
         shadowRadius: elevation * 0.5,
       });
@@ -125,7 +125,7 @@ interface TextWrapProps {
   style: any;
 }
 
-export const TextWrap = ({...props}: TextWrapProps) => {
+export const TextWrap = ({ ...props }: TextWrapProps) => {
   return (
     <Text
       allowFontScaling={false}
@@ -160,7 +160,7 @@ interface PageProps {
   children: React.ReactNode;
 }
 
-export const Page = ({...props}: PageProps & PaddingProps) => {
+export const Page = ({ ...props }: PageProps & PaddingProps) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -305,7 +305,9 @@ interface AvatarProp {
   flex: number;
 }
 
-export const Avatar = ({...props}: AvatarProp & GeneralProps & MarginProps) => {
+export const Avatar = ({
+  ...props
+}: AvatarProp & GeneralProps & MarginProps) => {
   return (
     <View
       style={[
@@ -328,7 +330,7 @@ export const Avatar = ({...props}: AvatarProp & GeneralProps & MarginProps) => {
         props.style,
       ]}>
       <Image
-        source={props.source || {uri: props.url}}
+        source={props.source || { uri: props.url }}
         resizeMode="cover"
         style={[
           styles.flex,
@@ -358,7 +360,7 @@ interface SizedBoxProps {
   backgroundColor: any;
 }
 
-export const SizedBox = ({...props}: SizedBoxProps) => (
+export const SizedBox = ({ ...props }: SizedBoxProps) => (
   <View
     style={{
       width: Width(props.width),
@@ -376,14 +378,14 @@ interface ScrollAreaProps {
   children: React.ReactNode;
 }
 
-export const ScrollArea = ({...props}: ScrollAreaProps) => (
+export const ScrollArea = ({ ...props }: ScrollAreaProps) => (
   <ScrollView
     keyboardShouldPersistTaps="handled"
-    contentContainerStyle={{flexGrow: props.flexGrow}}
+    contentContainerStyle={{ flexGrow: props.flexGrow }}
     horizontal={props.horizontal}
     showsVerticalScrollIndicator={false}
     showsHorizontalScrollIndicator={false}>
-    <View style={{flexGrow: props.flexGrow}}>{props.children}</View>
+    <View style={{ flexGrow: props.flexGrow }}>{props.children}</View>
   </ScrollView>
 );
 
@@ -395,7 +397,7 @@ interface ScrollAreaRefreshProps {
   children: React.ReactNode;
 }
 
-export const ScrollAreaRefresh = ({...props}: ScrollAreaRefreshProps) => (
+export const ScrollAreaRefresh = ({ ...props }: ScrollAreaRefreshProps) => (
   <ScrollView
     refreshControl={
       <RefreshControl
@@ -446,7 +448,7 @@ export const ImageWrap = ({
 }: ImageWrapProps & BorderRadiusProps & MarginProps & PaddingProps) => {
   return (
     <ImageBackground
-      source={props.source || {uri: props.url}}
+      source={props.source || { uri: props.url }}
       resizeMode={props.fit}
       style={[
         styles.overflow,
@@ -508,7 +510,7 @@ interface TouchWrapProps {
   children: any;
 }
 
-export const TouchWrap = ({...props}: TouchWrapProps & PaddingProps) => {
+export const TouchWrap = ({ ...props }: TouchWrapProps & PaddingProps) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
@@ -556,7 +558,7 @@ interface RoundedProps {
   children: React.ReactNode;
 }
 
-export const Rounded = ({...props}: RoundedProps & MarginProps) => {
+export const Rounded = ({ ...props }: RoundedProps & MarginProps) => {
   return (
     <View
       style={[
@@ -649,7 +651,7 @@ interface InputWrapProps {
   textPaddingHorizontal: number;
 }
 
-export const InputWrap = ({...props}: InputWrapProps & PaddingProps) => {
+export const InputWrap = ({ ...props }: InputWrapProps & PaddingProps) => {
   return (
     <Container
       flexGrow={0}
@@ -742,7 +744,7 @@ interface SlideProps {
   children: React.ReactNode;
 }
 
-export const SlideTransition = ({...props}: SlideProps) => {
+export const SlideTransition = ({ ...props }: SlideProps) => {
   const [animate] = React.useState(new Value(0));
   const slide = () => {
     Animated.timing(animate, {
@@ -803,7 +805,7 @@ interface SlideCallbackProps {
   index: boolean;
 }
 
-export const SlideTransitionCallback = ({...props}: SlideCallbackProps) => {
+export const SlideTransitionCallback = ({ ...props }: SlideCallbackProps) => {
   const [animate] = React.useState(new Value(0));
   const [show, setShow] = React.useState(props.index);
 
@@ -870,12 +872,12 @@ export const SlideTransitionCallback = ({...props}: SlideCallbackProps) => {
 
 /* ANCHOR  STYLES*/
 const styles = StyleSheet.create({
-  overflow: {overflow: 'hidden'},
-  flex: {flex: 1},
+  overflow: { overflow: 'hidden' },
+  flex: { flex: 1 },
   input: {
     paddingLeft: 0,
     fontWeight: Platform.OS === 'ios' ? 'bold' : null,
   },
-  width: {width: '100%'},
-  rounded: {justifyContent: 'center', alignItems: 'center'},
+  width: { width: '100%' },
+  rounded: { justifyContent: 'center', alignItems: 'center' },
 });

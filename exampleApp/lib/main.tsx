@@ -563,8 +563,8 @@ export const Rounded = ({...props}: RoundedProps & MarginProps) => {
         styles.rounded,
         {
           backgroundColor: props.backgroundColor,
-          height: Height(props.size),
-          width: Height(props.size),
+          height: Width(props.size),
+          width: Width(props.size),
           ...Elevation(props.elevation),
           borderRadius: props.radius || Height(props.size) / 2,
           marginRight: Width(props.marginRight),

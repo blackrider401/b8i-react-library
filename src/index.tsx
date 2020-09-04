@@ -413,6 +413,7 @@ export const ScrollAreaRefresh = ({...props}: ScrollAreaRefreshProps) => (
 /* ANCHOR IMAGE WRAP */
 
 interface ImageWrapProps {
+  flex: number;
   elevation: number;
   source: any;
   url: any;
@@ -451,10 +452,11 @@ export const ImageWrap = ({
       style={[
         styles.overflow,
         {
+          flex: props.flex,
           ...Elevation(props.elevation),
           position: props.position,
           width: Width(props.width) || props.widthPercent || '100%',
-          height: Height(props.height) || '100%',
+          height: Height(props.height) || undefined,
           backgroundColor: props.backgroundColor,
           borderRadius: props.borderRadius,
           borderTopLeftRadius: props.borderTopLeftRadius,
